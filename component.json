@@ -1,0 +1,11 @@
+{
+  "name": "oauth2-implicit",
+  "veresion": "0.0.0",
+  "main": "index.js",
+  "scripts": [
+    "./lib/**/*.js"
+  ],
+  "dependencies": {
+    "yields/store": "~0.2.0"
+  }
+}
