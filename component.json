@@ -3,7 +3,8 @@
   "veresion": "0.0.0",
   "main": "index.js",
   "scripts": [
-    "./lib/**/*.js"
+    "index.js",
+    "lib/**/*.js"
   ],
   "dependencies": {
     "yields/store": "~0.2.0"

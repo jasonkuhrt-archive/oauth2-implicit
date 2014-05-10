@@ -1,0 +1,17 @@
+framework: jasmine2
+serve_files:
+  - build/build.js
+  - test/**/*.js
+src_files:
+  - test/**/*.js
+  - lib/**/*.js
+  - index.js
+before_tests: component build
+on_exit: rm -rf ./build
+launch_in_ci:
+  - phantomjs
+launch_in_dev:
+  - phantomjs
+  - chrome
+  - firefox
+  - safari
