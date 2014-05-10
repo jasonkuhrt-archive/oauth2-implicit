@@ -1,6 +1,7 @@
 {
   "name": "oauth2-implicit",
-  "veresion": "0.0.0",
+  "repo": "jasonkuhrt/oauth2-implicit",
+  "version": "0.0.0",
   "main": "index.js",
   "scripts": [
     "index.js",
