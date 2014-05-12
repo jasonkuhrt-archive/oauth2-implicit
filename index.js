@@ -5,7 +5,7 @@
 'use strict';
 
 var uri = require('./lib/uri');
-var get_credentials = require('./lib/get-credentials');
+var get_credentials = require('./lib/credentials-get');
 
 
 // ImplicitGrant :: {} -> ((err, credentials -> void) -> void)
@@ -24,13 +24,13 @@ function ImplicitGrant(opts){
   if (opts.scope)         qso.scope = typeof opts.scope === 'string' ? opts.scope : opts.scope.join('+');
   if (opts.state)         qso.state = opts.state;
 
-  function doAuthorize(cb){
+  function do_authorize(cb){
     var credentials = get_credentials();
     if (credentials) return cb(null, credentials);
     location.assign(uri(opts.authorize_endpoint, qso));
   }
 
-  return doAuthorize;
+  return do_authorize;
 }
 
 
