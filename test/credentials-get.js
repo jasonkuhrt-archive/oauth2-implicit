@@ -8,17 +8,17 @@ var get_credentials = require('oauth2-implicit')._get_credentials;
 describe('instance gets credentials from URI hash', function(){
 
   it('clears and returns credentials', function(){
-    window.location.hash = 'access_token=foobar';
+    window.location.hash = 'access_token=foobar&token_type=bearer';
     expect(window.location.href.indexOf('#')).not.toBe(-1);
     var crd = get_credentials();
-    expect(crd.access_token).toBe('foobar');
+    expect(crd.accessToken).toBe('foobar');
     expect(window.location.href.indexOf('#')).toBe(-1);
   });
 
   it('caches result in localStorage', function(){
-    window.location.hash = 'access_token=hash-token';
+    window.location.hash = 'access_token=hash-token&token_type=bearer';
     get_credentials();
-    expect(JSON.parse(localStorage.getItem('oauth_credentials')).credentials.access_token).toBe('hash-token');
+    expect(JSON.parse(localStorage.getItem('oauth_credentials')).credentials.accessToken).toBe('hash-token');
   });
 
 });
@@ -29,7 +29,8 @@ describe('instance gets credentials from localStorage cache', function(){
   var data = {
     expires_at: null,
     credentials: {
-      access_token: 'foo-token'
+      accessToken: 'foo-token',
+      tokenType: 'bearer'
     }
   };
 
@@ -38,12 +39,12 @@ describe('instance gets credentials from localStorage cache', function(){
   });
 
   it('works', function(){
-    expect(get_credentials().access_token).toBe('foo-token');
+    expect(get_credentials().accessToken).toBe('foo-token');
   });
 
   it('only checked if no URI hash credentials', function(){
-    window.location.hash = 'access_token=foo-token-in-hash';
-    expect(get_credentials().access_token).toBe('foo-token-in-hash');
+    window.location.hash = 'access_token=foo-token-in-hash&token_type=bearer';
+    expect(get_credentials().accessToken).toBe('foo-token-in-hash');
   });
 
   it('is destroyed if has expired and returns null', function(){
@@ -59,7 +60,7 @@ describe('instance gets credentials from localStorage cache', function(){
     data2.expires_at = null;
     localStorage.setItem('oauth_credentials', JSON.stringify(data2));
     setTimeout(function(){
-      expect(get_credentials().access_token).toBe('foo-token');
+      expect(get_credentials().accessToken).toBe('foo-token');
       done();
     }, 30);
   });

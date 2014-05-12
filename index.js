@@ -4,7 +4,7 @@
 
 'use strict';
 
-var uri = require('./lib/uri');
+var uri = require('./lib/utils/uri');
 var get_credentials = require('./lib/credentials-get');
 
 
@@ -36,4 +36,7 @@ function ImplicitGrant(opts){
 
 
 module.exports = ImplicitGrant;
+
+// Export utils for testing purposes
 module.exports._get_credentials = get_credentials;
+module.exports._parse_oauth_credentials = require('./lib/utils/parse-oauth-credentials');
