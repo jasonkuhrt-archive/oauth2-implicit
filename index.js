@@ -25,7 +25,7 @@ function ImplicitGrant(opts){
   if (opts.state)         qso.state = opts.state;
 
   function do_authorize(cb){
-    var credentials = get_credentials();
+    var credentials = get_credentials(opts);
     if (credentials) return cb(null, credentials);
     location.assign(uri(opts.authorize_endpoint, qso));
   }
