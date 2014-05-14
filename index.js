@@ -30,8 +30,11 @@ function ImplicitGrant(opts){
     location.assign(uri(opts.authorize_endpoint, qso));
   }
 
+  do_authorize.localCredentials = get_credentials.bind(null, opts);
+
   return do_authorize;
 }
+
 
 
 
