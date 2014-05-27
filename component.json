@@ -8,6 +8,10 @@
     "lib/**/*.js"
   ],
   "dependencies": {
-    "yields/store": "~0.2.0"
+    "yields/store": "~0.2.0",
+    "visionmedia/node-querystring": "~0.6.6"
+  },
+  "development": {
+    "chaijs/chai": "*"
   }
 }

@@ -1,14 +1,17 @@
-framework: jasmine2
+framework: mocha
 serve_files:
   - build/build.js
+  - test/utils/*.js
   - test/**/*.js
 src_files:
-  - test/**/*.js
+  - test/**/*.coffee
   - lib/**/*.js
   - index.js
-before_tests: component build
-on_exit: rm -rf ./build
+before_tests: component build --dev && coffee -c test
+on_exit: rm -rf ./build && rm test/*.js
 launch_in_ci:
   - phantomjs
 launch_in_dev:
-  - phantomjs
+  - chrome
+  - safari
+  - firefox

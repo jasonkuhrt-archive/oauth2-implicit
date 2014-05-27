@@ -6,6 +6,7 @@
 
 var uri = require('./lib/utils/uri');
 var get_credentials = require('./lib/credentials-get');
+console.log(get_credentials);
 
 
 // ImplicitGrant :: {} -> ((err, credentials -> void) -> void)
