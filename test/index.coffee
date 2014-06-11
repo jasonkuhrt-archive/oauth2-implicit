@@ -1,4 +1,3 @@
-# global afterEach, beforeEach, expect, describe, it
 O2I = require('oauth2-implicit')
 
 

@@ -1,7 +1,6 @@
 framework: mocha
 serve_files:
   - build/build.js
-  - test/utils/*.js
   - build/test/*.js
 src_files:
   - test/**/*.coffee

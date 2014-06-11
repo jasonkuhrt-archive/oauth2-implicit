@@ -1,0 +1,1 @@
+window.a = require('chai').assert

@@ -1,4 +1,3 @@
-# global beforeEach, afterEach, expect, describe, it
 scaffold_hash = ->
   beforeEach ->
     window.location.hash = 'access_token=' + @data.data.accessToken + '&token_type=' + @data.data.tokenType

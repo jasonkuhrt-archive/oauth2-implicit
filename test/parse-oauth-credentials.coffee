@@ -1,4 +1,3 @@
-# global expect, describe, it
 parse = require('oauth2-implicit')._parse_oauth_credentials
 
 
