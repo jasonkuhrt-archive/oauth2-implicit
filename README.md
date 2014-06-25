@@ -8,7 +8,7 @@ This library is designed against the [Implicit Grant flow as specified in the OA
 
 ## Installation
 
-  component install jasonkuhrt/oauth2-implicit
+    component install jasonkuhrt/oauth2-implicit
 
 
 
