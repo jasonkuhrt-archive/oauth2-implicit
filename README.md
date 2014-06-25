@@ -20,6 +20,8 @@ This library is designed against the [Implicit Grant flow as specified in the OA
 
 ##### `Options :: {}`
 Minimal configuration of the Implicit Grant flow. Fields:
+  - **`auth_uri :: String`**  
+  The URI that the Implicit Grant Flow will run against. In OAuth2 parlance this URI points to the Authorization Server.
   - **`client_id :: String`**  
   The client_id to make the OAuth request with. You should attain this from the Authorization Server during Application Registration time.
   - **`scope :: String || Array`**  
