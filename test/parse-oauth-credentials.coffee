@@ -1,4 +1,4 @@
-parse = require('oauth2-implicit')._parse_oauth_credentials
+parse = require('oauth2-implicit').parseCredentials
 
 
 

@@ -18,7 +18,7 @@ scaffold_cache = ->
 
 
 
-get_credentials = require('oauth2-implicit')._get_credentials
+get_credentials = require('oauth2-implicit').getCredentials
 describe 'get_credentials', ->
   beforeEach ->
     @request =
