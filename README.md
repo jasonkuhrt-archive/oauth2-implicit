@@ -62,7 +62,7 @@ Convert String URI Hash credentials into structured [`Credentials`](#credentials
 
 ## NOTES
 
-- `localStorage` is used to cache `credentials`. The benefit of this is that we avoid some network IO: A redirect to the Authorization Server and another back to the client app. Rest assured the cache is discarded if the `credentials`' `expiresIn` has been recahed (internally stored as `expiresAt`). Beware of user edge-case bug #8 which should be fixed soon.
+- `localStorage` is used to cache `credentials`. The benefit of this is that we avoid some network IO: A redirect to the Authorization Server and another back to the client app. Rest assured the cache is discarded if the `credentials`' `expiresIn` has been recahed (internally stored as `expiresAt`).
 
 
 ## Test
