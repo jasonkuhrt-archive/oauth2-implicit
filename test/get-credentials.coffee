@@ -25,7 +25,6 @@ describe '.getCredentials()', ->
     fixCache()
 
     it 'returns credentials', ->
-      console.log(getCredentials(@request))
       a getCredentials(@request).accessToken is 'foo-token'
 
     it 'if cache is expired, cache is destroyed, returns null', ->
