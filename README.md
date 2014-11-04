@@ -13,9 +13,9 @@ This library is designed against the [Implicit Grant flow as specified in the OA
 
 ## API
 
-#### ImplicitGrant()
+#### implicitGrant()
 
-    ImplicitGrant :: Options -> Credentials
+    implicitGrant :: Options -> Credentials
 
 ##### `Options :: {}`
 Minimal configuration of the Implicit Grant flow. Fields:
@@ -34,9 +34,20 @@ Minimal configuration of the Implicit Grant flow. Fields:
 Credentials extracted from the URI hash as put there by the Authorization Server redirection process. [Fields](#credentials).
 
 
-### .getCredentials()
+### .requestCredentials()
 
-    Credentials :: -> Credentials | null
+    requestCredentials :: Options -> null
+
+Make a fresh token request to the authorization server. Note that this function ***does not read the result following redirect***, so your application still needs to use either `implicitGrant()` or `.readCredentials()`. This function is useful if, for example, your app makes some API call to a Resource Server that returns an Authorization Server (AS) error ("invalid token" or "expired token") and you need to make a fresh request to get credentials from said AS. This function will clear cache.
+
+##### `Options :: {}`
+  See `Options` docs for `implicitGrant`.
+
+
+
+### .readCredentials()
+
+    readCredentials :: -> Credentials | null
 
 Try clear the credentials from the URI Hash and return them as [`Credentials`](#credentials). Extracted credentials are cached into local storage, overwritting any previous cache. Cache is only accessed when URI Hash does not contain credentials. If no credentials are found `null` is returned.
 

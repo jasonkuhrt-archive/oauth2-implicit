@@ -1,8 +1,8 @@
-getCredentials = o2i.getCredentials
+readCredentials = o2i.readCredentials
 
 
 
-describe '.getCredentials()', ->
+describe '.readCredentials()', ->
   fixData()
 
   describe 'from URI hash', ->
@@ -10,13 +10,13 @@ describe '.getCredentials()', ->
 
     it 's creds and clears hash', ->
       a window.location.href.indexOf('#') isnt -1
-      crd = getCredentials(@request)
+      crd = readCredentials(@request)
       a crd.accessToken is 'foo-token'
       a window.location.href.indexOf('#') is -1
 
 
     it 'caches result in localStorage', ->
-      getCredentials @request
+      readCredentials @request
       a JSON.parse(localStorage.getItem('oauth_credentials')).data.accessToken is 'foo-token'
 
 
@@ -25,25 +25,25 @@ describe '.getCredentials()', ->
     fixCache()
 
     it 'returns credentials', ->
-      a getCredentials(@request).accessToken is 'foo-token'
+      a readCredentials(@request).accessToken is 'foo-token'
 
     it 'if cache is expired, cache is destroyed, returns null', ->
       @cache.expiresAt = Date.now() - 1000
       localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
-      a getCredentials(@request) is null
+      a readCredentials(@request) is null
       a localStorage.getItem('oauth_credentials') is null
 
     it 'never expires if credentials expiresIn is null', (done) ->
       @cache.expiresAt = null
       localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
       setTimeout (=>
-        a getCredentials(@request).accessToken is 'foo-token'
+        a readCredentials(@request).accessToken is 'foo-token'
         done()
       ), 30
 
     it 'cache discarded if request differs from one causing cached response', ->
       @request.client_id = 'something-else'
-      a getCredentials(@request) is null
+      a readCredentials(@request) is null
       a localStorage.getItem('oauth_credentials') is null
 
 
@@ -53,13 +53,13 @@ describe '.getCredentials()', ->
       it 'is destroyed, returns null', ->
         @cache.version = '0.1.0'
         localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
-        eq getCredentials(@request), null
+        eq readCredentials(@request), null
         eq localStorage.getItem('oauth_credentials'), null
 
       it 'where there is no "version" property, is destroyed, returns null', ->
         delete @cache.version
         localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
-        eq getCredentials(@request), null
+        eq readCredentials(@request), null
         eq localStorage.getItem('oauth_credentials'), null
 
 
@@ -71,5 +71,5 @@ describe '.getCredentials()', ->
     it 'cache is rewritten from URI hash', ->
       setHash access_token:'foo-token-in-hash', token_type:'bearer'
       a JSON.parse(localStorage.getItem('oauth_credentials')).data.accessToken is 'foo-token'
-      a getCredentials(@request).accessToken is 'foo-token-in-hash'
+      a readCredentials(@request).accessToken is 'foo-token-in-hash'
       a JSON.parse(localStorage.getItem('oauth_credentials')).data.accessToken is 'foo-token-in-hash'

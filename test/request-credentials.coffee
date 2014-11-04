@@ -1,4 +1,4 @@
-requestCredentials = o2i.request
+requestCredentials = o2i.requestCredentials
 oldAssign = window.location.assign
 
 
