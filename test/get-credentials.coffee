@@ -25,18 +25,11 @@ describe '.getCredentials()', ->
     fixCache()
 
     it 'returns credentials', ->
+      console.log(getCredentials(@request))
       a getCredentials(@request).accessToken is 'foo-token'
-
 
     it 'if cache is expired, cache is destroyed, returns null', ->
       @cache.expiresAt = Date.now() - 1000
-      localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
-      a getCredentials(@request) is null
-      a localStorage.getItem('oauth_credentials') is null
-
-
-    it 'if cache is outdated, cache is destroyed, returns null', ->
-      @cache.version = '0.1.0'
       localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
       a getCredentials(@request) is null
       a localStorage.getItem('oauth_credentials') is null
@@ -49,11 +42,26 @@ describe '.getCredentials()', ->
         done()
       ), 30
 
-
     it 'cache discarded if request differs from one causing cached response', ->
       @request.client_id = 'something-else'
       a getCredentials(@request) is null
       a localStorage.getItem('oauth_credentials') is null
+
+
+
+    describe 'outdated cache', ->
+
+      it 'is destroyed, returns null', ->
+        @cache.version = '0.1.0'
+        localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
+        eq getCredentials(@request), null
+        eq localStorage.getItem('oauth_credentials'), null
+
+      it 'where there is no "version" property, is destroyed, returns null', ->
+        delete @cache.version
+        localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
+        eq getCredentials(@request), null
+        eq localStorage.getItem('oauth_credentials'), null
 
 
 
