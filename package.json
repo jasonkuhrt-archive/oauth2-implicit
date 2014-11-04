@@ -10,7 +10,7 @@
   },
   "name": "oauth2-implicit",
   "homepage": "https://github.com/jasonkuhrt/oauth2-implicit",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "devDependencies": {
     "coffee-script": "^1.8.0",
     "testem": "^0.6.22",

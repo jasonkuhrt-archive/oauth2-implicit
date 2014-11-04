@@ -18,7 +18,7 @@ window.fixData = ->
       response_type: 'token'
 
     @cache =
-      version: '0.4.1'
+      version: '0.4.2'
       expiresAt: null
       id: JSON.stringify(@request)
       data:
