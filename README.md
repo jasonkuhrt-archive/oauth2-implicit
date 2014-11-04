@@ -1,5 +1,4 @@
-# oauth2-implicit
-
+# oauth2-implicit [![build status](https://secure.travis-ci.org/jasonkuhrt/oauth2-implicit.png)](http://travis-ci.org/jasonkuhrt/oauth2-implicit)
 A minimal oauth2-spec-based client utility for traveling through the OAuth2 Implicit Grant flow
 
 This library is designed against the [Implicit Grant flow as specified in the OAuth2 specification RFC 6749](http://tools.ietf.org/html/rfc6749#section-4.2)
