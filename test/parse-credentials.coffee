@@ -1,26 +1,31 @@
 parse = o2i.parseCredentials
 
-str_min = hashify
-  access_token:'a'
-  token_type:'bearer'
-
-str = hashify
-  access_token:'a'
-  token_type: 'bearer'
-  expires_in:100
-  scope:'a'
-  state:'b'
-
 
 
 describe '.parseCredentials() gets credentials from URI hash', ->
+  beforeEach ->
+    @credentialsResponse =
+      access_token:'a'
+      token_type: 'bearer'
+      expires_in:100
+      scope:'a'
+      state:'b'
+
+    @credentialsResponseMin =
+      access_token:'a'
+      token_type:'bearer'
+
+    @strMin = hashify @credentialsResponseMin
+    @str = hashify @credentialsResponse
+
+
 
   it 'converts keys to camel-case', ->
-    eq parse(str), {
-      accessToken: 'a',
-      tokenType: 'bearer',
-      expiresIn: '100',
-      scope: ['a'],
+    eq parse(@str), {
+      accessToken: 'a'
+      tokenType: 'bearer'
+      expiresIn: '100'
+      scope: ['a']
       state: 'b'
     }
 
@@ -40,37 +45,38 @@ describe '.parseCredentials() gets credentials from URI hash', ->
   describe '.state', ->
 
     it 'if missing defaults to null', ->
-      o = parse(str_min)
+      o = parse @strMin
       eq o.state, null
 
 
   describe '.token_type', ->
 
-    it 'if missing defaults to null', ->
-      o = parse(str_min)
-      eq o.state, null
+    it 'if missing throws a parse error', ->
+      delete @credentialsResponse.token_type
+      errorMatches = 'Auth Server response is missing "token_type"'
+      a.throws (=> parse hashify @credentialsResponse), errorMatches
 
 
   describe '.expiresIn', ->
 
     it 'if missing defaults to null', ->
-      o = parse(str_min)
+      o = parse @strMin
       eq o.expiresIn, null
 
 
   describe '.scope', ->
 
     it 'if missing defaults to empty array', ->
-      o = parse(str_min)
+      o = parse @strMin
       eq o.scope.length, 0
 
 
     it 'if single item becomes singlton array', ->
-      o = parse(str_min + '&scope=foo')
+      o = parse @strMin + '&scope=foo'
       eq o.scope[0], 'foo'
 
 
     it 'if multi scope becomes array', ->
-      o = parse str_min + '&scope=foo&scope=bar'
+      o = parse @strMin + '&scope=foo&scope=bar'
       a.include o.scope, 'foo'
       a.include o.scope, 'bar'

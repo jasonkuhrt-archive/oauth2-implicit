@@ -45,7 +45,6 @@ describe '.getCredentials()', ->
       @cache.expiresAt = null
       localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
       setTimeout (=>
-        console.log getCredentials(@request)
         a getCredentials(@request).accessToken is 'foo-token'
         done()
       ), 30
