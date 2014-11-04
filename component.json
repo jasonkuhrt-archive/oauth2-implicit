@@ -12,5 +12,6 @@
   },
   "development": {
     "chaijs/chai": "*"
-  }
+  },
+  "license": "MIT"
 }
