@@ -48,6 +48,16 @@ Try clear the credentials from the URI Hash and return them as [`Credentials`](#
 Convert String URI Hash credentials into structured [`Credentials`](#credentials).
 
 
+### .clearCache()
+```
+clearCache :: -> Boolean
+```
+For clearing cache manually. This is at least useful for cleanly logging out. While trivial, the client application should not have to now the cacheName being used.
+
+Returns `Boolean` where `true` indicates that cache was removed and `false` that there was no cache to remove.
+
+
+
 
 ## Types
 
