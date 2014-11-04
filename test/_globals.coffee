@@ -2,15 +2,13 @@ window.a = require('chai').assert
 window.eq = a.deepEqual
 window.o2i = require('oauth2-implicit')
 
-
-
-window.hashify = hashify = (hash)->
+window.hashify = (hash)->
   if typeof hash isnt 'object' then return hash
   Object.keys(hash)
   .reduce ((qsArr, k)-> qsArr.concat(["#{k}=#{hash[k]}"])), []
   .join '&'
 
-window.setHash = setHash = (hash)->
+window.setHash = (hash)->
   window.location.hash = hashify hash
 
 window.fixData = ->

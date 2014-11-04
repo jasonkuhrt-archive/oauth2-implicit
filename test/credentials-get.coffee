@@ -36,7 +36,6 @@ describe 'getCredentials', ->
     fixCache()
 
     it 'returns credentials', ->
-      console.log getCredentials(@request), @request
       a getCredentials(@request).accessToken is 'foo-token'
 
 
