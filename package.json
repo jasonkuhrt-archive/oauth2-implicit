@@ -1,6 +1,7 @@
 {
   "name": "oauth2-implicit",
   "private": true,
+  "version": "0.3.1",
   "scripts": {
     "test": "testem ci"
   },
@@ -11,6 +12,8 @@
   "license": "MIT",
   "homepage": "https://github.com/jasonkuhrt/oauth2-implicit",
   "devDependencies": {
+    "coffee-script": "^1.8.0",
+    "component": "^1.0.0",
     "testem": "^0.6.22"
   }
 }
