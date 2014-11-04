@@ -2,18 +2,7 @@ getCredentials = o2i.getCredentials
 
 
 
-describe '.clearCache()', ->
-  fixData()
-  fixCache()
-
-  it 'manually clears the cache', ->
-    a localStorage.getItem('oauth_credentials')
-    o2i.clearCache()
-    a !localStorage.getItem('oauth_credentials')
-
-
-
-describe 'getCredentials', ->
+describe '.getCredentials()', ->
   fixData()
 
   describe 'from URI hash', ->
@@ -53,11 +42,11 @@ describe 'getCredentials', ->
       a localStorage.getItem('oauth_credentials') is null
 
     it 'never expires if credentials expiresIn is null', (done) ->
-      self = this
       @cache.expiresAt = null
       localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
-      setTimeout (->
-        a getCredentials(self.request).accessToken is 'foo-token'
+      setTimeout (=>
+        console.log getCredentials(@request)
+        a getCredentials(@request).accessToken is 'foo-token'
         done()
       ), 30
 
@@ -69,7 +58,7 @@ describe 'getCredentials', ->
 
 
 
-  describe 'when creds in URI hash AND cache', ->
+  describe 'when credentials in URI hash AND cache', ->
     fixCache()
     fixHash()
 

@@ -13,7 +13,7 @@ str = hashify
 
 
 
-describe 'instance gets credentials from URI hash', ->
+describe '.parseCredentials() gets credentials from URI hash', ->
 
   it 'converts keys to camel-case', ->
     eq parse(str), {
@@ -25,40 +25,40 @@ describe 'instance gets credentials from URI hash', ->
     }
 
 
-  describe 'access_token', ->
+  describe '.access_token', ->
 
     it 'if missing throws', ->
       a.throws -> parse 'token_type=a'
 
 
-  describe 'token_type', ->
+  describe '.token_type', ->
 
     it 'if missing throws', ->
       a.throws -> parse 'access_token=foobar'
 
 
-  describe 'state', ->
+  describe '.state', ->
 
     it 'if missing defaults to null', ->
       o = parse(str_min)
       eq o.state, null
 
 
-  describe 'token_type', ->
+  describe '.token_type', ->
 
     it 'if missing defaults to null', ->
       o = parse(str_min)
       eq o.state, null
 
 
-  describe 'expiresIn', ->
+  describe '.expiresIn', ->
 
     it 'if missing defaults to null', ->
       o = parse(str_min)
       eq o.expiresIn, null
 
 
-  describe 'scope', ->
+  describe '.scope', ->
 
     it 'if missing defaults to empty array', ->
       o = parse(str_min)
