@@ -26,6 +26,7 @@ describe 'get_credentials', ->
       response_type: 'token'
 
     @data =
+      version: '0.3.1'
       expiresAt: null
       id: JSON.stringify(@request)
       data:
@@ -53,16 +54,22 @@ describe 'get_credentials', ->
   describe 'when credentials in cache', ->
     scaffold_cache()
 
-    it 's creds (sans enevelope)', ->
+    it 'returns creds (sans enevelope)', ->
       a get_credentials(@request).accessToken is 'foo-token'
 
 
-    it 'if cache is expired, cache is destroyed, s null', ->
+    it 'if cache is expired, cache is destroyed, returns null', ->
       @data.expiresAt = Date.now() - 1000
       localStorage.setItem 'oauth_credentials', JSON.stringify(@data)
       a get_credentials(@request) is null
       a localStorage.getItem('oauth_credentials') is null
 
+
+    it 'if cache is outdated, cache is destroyed, returns null', ->
+      @data.version = '0.1.0'
+      localStorage.setItem 'oauth_credentials', JSON.stringify(@data)
+      a get_credentials(@request) is null
+      a localStorage.getItem('oauth_credentials') is null
 
     it 'never expires if credentials expiresIn is null', (done) ->
       self = this
