@@ -1,6 +1,5 @@
 {
   "license": "MIT",
-  "private": true,
   "scripts": {
     "test": "testem ci"
   },
@@ -15,5 +14,17 @@
     "coffee-script": "^1.8.0",
     "testem": "^0.6.22",
     "component": "^1.0.0"
-  }
+  },
+  "description": "A minimal oauth2-spec-based client utility for traveling through the OAuth2 Implicit Grant flow",
+  "bugs": {
+    "url": "https://github.com/jasonkuhrt/oauth2-implicit/issues"
+  },
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "qs": "^2.3.3"
+  },
+  "author": "Jason Kuhrt <jasonkuhrt@me.com> (http://jasonkuhrt.com/)"
 }

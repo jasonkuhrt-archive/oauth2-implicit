@@ -2,6 +2,8 @@ window.a = require('chai').assert
 window.eq = a.deepEqual
 window.o2i = require('oauth2-implicit')
 
+
+
 window.hashify = (hash)->
   if typeof hash isnt 'object' then return hash
   Object.keys(hash)
@@ -17,7 +19,7 @@ window.fixData = ->
       client_id: 'foo-client'
       response_type: 'token'
 
-    @cache =
+    @creds =
       version: '0.5.0'
       expiresAt: null
       id: JSON.stringify(@request)
@@ -28,11 +30,7 @@ window.fixData = ->
 window.fixHash = ->
   beforeEach ->
     setHash
-      access_token: @cache.data.accessToken
-      token_type: @cache.data.token_type
+      access_token: @creds.data.accessToken
+      token_type: @creds.data.token_type
 
   afterEach -> setHash ''
-
-window.fixCache = ->
-  beforeEach -> localStorage.setItem 'oauth_credentials', JSON.stringify(@cache)
-  afterEach -> localStorage.clear()

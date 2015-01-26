@@ -7,7 +7,7 @@ This library is designed against the [Implicit Grant flow as specified in the OA
 
 ## Installation
 
-    component install jasonkuhrt/oauth2-implicit
+    npm --save install oauth2-implicit
 
 
 
@@ -38,7 +38,7 @@ Credentials extracted from the URI hash as put there by the Authorization Server
 
     requestCredentials :: Options -> null
 
-Make a fresh token request to the authorization server. Note that this function ***does not read the result following redirect***, so your application still needs to use either `implicitGrant()` or `.readCredentials()`. This function is useful if, for example, your app makes some API call to a Resource Server that returns an Authorization Server (AS) error ("invalid token" or "expired token") and you need to make a fresh request to get credentials from said AS. This function will clear cache.
+Make a fresh token request to the authorization server. Note that this function ***does not read the result following redirect***, so your application still needs to use either `implicitGrant()` or `.readCredentials()`. This function is useful if, for example, your app makes some API call to a Resource Server that returns an Authorization Server (AS) error ("invalid token" or "expired token") and you need to make a fresh request to get credentials from said AS.
 
 ##### `Options :: {}`
   See `Options` docs for `implicitGrant`.
@@ -49,7 +49,7 @@ Make a fresh token request to the authorization server. Note that this function 
 
     readCredentials :: -> Credentials | null
 
-Try clear the credentials from the URI Hash and return them as [`Credentials`](#credentials). Extracted credentials are cached into local storage, overwritting any previous cache. Cache is only accessed when URI Hash does not contain credentials. If no credentials are found `null` is returned.
+Try clear the credentials from the URI Hash and return them as [`Credentials`](#credentials). If no credentials are found `null` is returned.
 
 
 ### .parseCredentials()
@@ -57,15 +57,6 @@ Try clear the credentials from the URI Hash and return them as [`Credentials`](#
     parseCredentials :: String:URIHash -> Credentials
 
 Convert String URI Hash credentials into structured [`Credentials`](#credentials).
-
-
-### .clearCache()
-```
-clearCache :: -> Boolean
-```
-For clearing cache manually. This is at least useful for cleanly logging out. While trivial, the client application should not have to now the cacheName being used.
-
-Returns `Boolean` where `true` indicates that cache was removed and `false` that there was no cache to remove.
 
 
 
@@ -80,9 +71,6 @@ Returns `Boolean` where `true` indicates that cache was removed and `false` that
     scope       :: [String]
     state       :: String | null
 
-## NOTES
-
-- `localStorage` is used to cache `credentials`. The benefit of this is that we avoid some network IO: A redirect to the Authorization Server and another back to the client app. Rest assured the cache is discarded if the `credentials`' `expiresIn` has been recahed (internally stored as `expiresAt`).
 
 
 ## Test
