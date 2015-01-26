@@ -1,7 +1,6 @@
 {
   "license": "MIT",
   "scripts": {
-    "test": "testem ci"
   },
   "repository": {
     "url": "https://github.com/jasonkuhrt/oauth2-implicit.git",
@@ -11,9 +10,7 @@
   "homepage": "https://github.com/jasonkuhrt/oauth2-implicit",
   "version": "0.5.0",
   "devDependencies": {
-    "coffee-script": "^1.8.0",
-    "testem": "^0.6.22",
-    "component": "^1.0.0"
+    "coffee-script": "^1.8.0"
   },
   "description": "A minimal oauth2-spec-based client utility for traveling through the OAuth2 Implicit Grant flow",
   "bugs": {
