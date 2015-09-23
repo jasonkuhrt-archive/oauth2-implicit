@@ -1,6 +1,6 @@
 window.a = require('chai').assert
 window.eq = a.deepEqual
-window.o2i = require('oauth2-implicit')
+window.o2i = require('../lib')
 
 
 
