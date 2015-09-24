@@ -32,22 +32,33 @@ implicitGrant :: Options -> Credentials
 Configure aspects of the Implicit Grant flow.
 
 ##### `auth_uri :: String`
-The URI that the Implicit Grant Flow will run against. In OAuth2 parlance this URI points to the Authorization Server.
+The location of the Authorization Service that the Client will run the flow against.
 
 ##### `client_id :: String`
-The client_id to make the OAuth request with. You should attain this from the Authorization Server during Application Registration time.
+The unique identification for this Client. The Authorization Service requires this information from clients trying to run this flow. Every Client who has beforehand registered with the Authorization Service should have this information (it is created during registration time).
 
 ##### `scope :: String | Array`
-The scope that app will use in its request to Authorization Server. If `Array` type used scopes will be joined by `+` into a `String`. Authorization servers should accept this format (DoorKeeper ruby does). Please open an issue if you discover otherwise.
+The scope that Client will use in its request to Authorization Server. If `Array` type used scopes will be joined by `+` into a `String`. Authorization servers should accept this format (DoorKeeper ruby does) but please open an issue if you discover otherwise.
 
-##### `state :: String` `?`
-Optional data that the Authorization Server will return to the redirect_uri. Learn more from the link:http://tools.ietf.org/html/rfc6749#section-4.1.1[spec].
+##### `state :: String` `optional`
+Arbitrary Client data that Authorization Server will pass back to Client in the response phase (redirect to the redirect_uri). For details on state see the link:http://tools.ietf.org/html/rfc6749#section-4.1.1[specification].
 
-##### `redirect_uri :: String`  `?`
-Optional redirect_uri that the Authorization Server should send the user back to. If provided this must match a redirect_uri that was provided to the Authorization Server during Application Registration time. Since multiple uri_redirects can be registered, presumably the client request can dynamically choose which one to use at runtime.
+##### `redirect_uri :: String` `optional`
+The location that Client would like Authorization Service to finish the flow at. The given value must match a URI that was provided to the Authorization Service at registration time.
+
+Defaults to the current protocol plus host (which is what you usually want), examples:
+
+[options="header"]
+|===
+| Source | Redirect
+| `http://foo.bar.io:8000/qux#wux` | `http:/foo.bar.io:8000`
+| `https://foo.bar.io?lop=mop` | `https://foo.bar.io`
+|===
+
 
 #### `Credentials :: {}`
 <<credentials, `Credentials`>> extracted from the URI hash as put there by the Authorization Server redirection process.
+
 
 
 ### `requestCredentials`
