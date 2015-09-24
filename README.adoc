@@ -20,33 +20,33 @@ npm --save install oauth2-implicit
 
 ## API
 
-#### `implicitGrant`
+### `implicitGrant`
 
 ```
 implicitGrant :: Options -> Credentials
 ```
 
 [[implicit-grant-options]]
-##### `Options :: {}`
+#### `Options :: {}`
 
 Configure aspects of the Implicit Grant flow.
 
-###### `auth_uri :: String`
+##### `auth_uri :: String`
 The URI that the Implicit Grant Flow will run against. In OAuth2 parlance this URI points to the Authorization Server.
 
-###### `client_id :: String`
+##### `client_id :: String`
 The client_id to make the OAuth request with. You should attain this from the Authorization Server during Application Registration time.
 
-###### `scope :: String | Array`
+##### `scope :: String | Array`
 The scope that app will use in its request to Authorization Server. If `Array` type used scopes will be joined by `+` into a `String`. Authorization servers should accept this format (DoorKeeper ruby does). Please open an issue if you discover otherwise.
 
-###### `state :: String` `?`
+##### `state :: String` `?`
 Optional data that the Authorization Server will return to the redirect_uri. Learn more from the link:http://tools.ietf.org/html/rfc6749#section-4.1.1[spec].
 
-###### `redirect_uri :: String`  `?`
+##### `redirect_uri :: String`  `?`
 Optional redirect_uri that the Authorization Server should send the user back to. If provided this must match a redirect_uri that was provided to the Authorization Server during Application Registration time. Since multiple uri_redirects can be registered, presumably the client request can dynamically choose which one to use at runtime.
 
-##### `Credentials :: {}`
+#### `Credentials :: {}`
 <<credentials, `Credentials`>> extracted from the URI hash as put there by the Authorization Server redirection process.
 
 
@@ -87,7 +87,7 @@ This library is designed in accordance with Implicit Grant flow as specified in 
 
 ## Types
 
-#### `Credentials`
+### `Credentials`
 ```yaml
 accessToken : String
 tokenType   : String
