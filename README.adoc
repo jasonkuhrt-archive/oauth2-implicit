@@ -75,7 +75,7 @@ Try clear the credentials from the URI Hash and return them as [`Credentials`](#
 parseCredentials :: String:URIHash -> Credentials
 ```
 
-Convert String URI Hash credentials into structured <<Credentials>>
+Convert String URI Hash credentials into structured <<credentials>>
 
 
 
