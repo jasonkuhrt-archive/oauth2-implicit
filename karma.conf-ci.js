@@ -25,7 +25,8 @@ module.exports = function (config) {
   baseConfig.reporters.push('saucelabs')
   baseConfig.sauceLabs = {
     testName: 'oauth2-implicit',
-    startConnect: false
+    startConnect: false,
+    tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
   }
   baseConfig.customLaunchers = customLaunchers
   baseConfig.browsers = Object.keys(customLaunchers)
