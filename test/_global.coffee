@@ -1,6 +1,6 @@
 window.a = require('chai').assert
 window.eq = a.deepEqual
-window.o2i = require('../lib')
+window.o2i = require('../lib').default
 
 
 
