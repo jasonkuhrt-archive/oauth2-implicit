@@ -1,7 +1,8 @@
 {
   "license": "MIT",
   "scripts": {
-    "test": "karma start --single-run --browsers Chrome,PhantomJS"
+    "test": "karma start karma.conf-ci.js --single-run",
+    "dev": "karma start --browsers PhantomJS --log-level error"
   },
   "dependencies": {
     "qs": "^2.3.3"
@@ -20,9 +21,9 @@
   "main": "lib/index.js",
   "description": "A minimal oauth2-spec-based client utility for traveling through the OAuth2 Implicit Grant flow",
   "devDependencies": {
-    "chai": "^3.3.0",
     "babel-core": "^5.8.25",
     "babel-loader": "^5.3.2",
+    "chai": "^3.3.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.8.0",
     "eslint-config-littlebits": "^0.2.1",
@@ -33,6 +34,7 @@
     "karma-mocha-reporter": "^1.1.1",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-safari-launcher": "^0.1.1",
+    "karma-sauce-launcher": "^0.2.14",
     "karma-webpack": "^1.7.0",
     "phantomjs": "^1.9.18",
     "webpack": "^1.12.2"

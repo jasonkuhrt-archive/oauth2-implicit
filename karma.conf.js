@@ -1,5 +1,6 @@
+
 module.exports = function (config) {
-  config.set({
+  return config.set({
     frameworks: ['mocha'],
     files: [
       'test/**/*.coffee'
@@ -8,10 +9,6 @@ module.exports = function (config) {
       '**/*.js': ['webpack'],
       '**/*.coffee': ['webpack'],
     },
-    reporters: [
-      'mocha'
-    ],
-    logLevel: config.LOG_WARN,
     webpack: {
       module: {
         loaders: [
@@ -23,5 +20,11 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: true,
     },
+    reporters: [
+      'mocha'
+    ],
+    mochaReporter: {
+      output: 'minimal',
+    }
   })
 }
