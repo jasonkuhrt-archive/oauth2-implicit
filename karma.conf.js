@@ -23,14 +23,5 @@ module.exports = function (config) {
     webpackMiddleware: {
       noInfo: true,
     },
-    plugins: [
-      'karma-webpack',
-      'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
-      'karma-safari-launcher',
-      'karma-firefox-launcher',
-      'karma-mocha',
-      'karma-mocha-reporter',
-    ]
   })
 }
