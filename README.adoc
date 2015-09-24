@@ -47,7 +47,7 @@ Optional data that the Authorization Server will return to the redirect_uri. Lea
 Optional redirect_uri that the Authorization Server should send the user back to. If provided this must match a redirect_uri that was provided to the Authorization Server during Application Registration time. Since multiple uri_redirects can be registered, presumably the client request can dynamically choose which one to use at runtime.
 
 ##### `Credentials :: {}`
-Credentials extracted from the URI hash as put there by the Authorization Server redirection process. <<Credentials, Fields>>.
+<<credentials, `Credentials`>> extracted from the URI hash as put there by the Authorization Server redirection process.
 
 
 ### `requestCredentials`
@@ -67,7 +67,7 @@ See <<implicit-grant-options, docs for `implicitGrant`>>.
 readCredentials :: -> Credentials | null
 ```
 
-Try clear the credentials from the URI Hash and return them as [`Credentials`](#credentials). If no credentials are found `null` is returned.
+Try clear the credentials from the URI Hash and return them as <<credentials, `Credentials`>>. If no credentials are found `null` is returned.
 
 
 ### `parseCredentials`
@@ -75,7 +75,7 @@ Try clear the credentials from the URI Hash and return them as [`Credentials`](#
 parseCredentials :: String:URIHash -> Credentials
 ```
 
-Convert String URI Hash credentials into structured <<credentials>>
+Convert String URI Hash credentials into structured <<credentials, `Credentials`>>
 
 
 
