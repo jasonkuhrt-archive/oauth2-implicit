@@ -1,23 +1,27 @@
+/* eslint-disable */
+
 var baseConfig = require('./karma.conf')({ set: function (x) { return x }})
-var customLaunchers = {
-  sl_chrome: {
-    base: 'SauceLabs',
+
+var customLaunchers = [
+  {
     browserName: 'chrome',
-    platform: 'Windows 7',
-    version: '35'
   },
-  sl_firefox: {
-    base: 'SauceLabs',
+  {
     browserName: 'firefox',
-    version: '30'
   },
-  sl_ie_11: {
-    base: 'SauceLabs',
+  {
     browserName: 'internet explorer',
-    platform: 'Windows 8.1',
-    version: '11'
-  }
-}
+  },
+  {
+    browserName: 'safari',
+  },
+].map(function (l) {
+  l.base = 'SauceLabs'
+  l.name = l.browserName
+  + '-platform-' + (l.platform || 'default')
+  + '-browser-version-' + (l.version || 'default')
+  return l
+})
 
 
 
@@ -28,7 +32,10 @@ module.exports = function (config) {
     startConnect: false,
     tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
   }
-  baseConfig.customLaunchers = customLaunchers
-  baseConfig.browsers = Object.keys(customLaunchers)
+  baseConfig.customLaunchers = customLaunchers.reduce(function(ls,l){
+    ls[l.name] = l
+    return ls
+  }, {})
+  baseConfig.browsers = customLaunchers.map(function(l){ return l.name })
   config.set(baseConfig)
 }
