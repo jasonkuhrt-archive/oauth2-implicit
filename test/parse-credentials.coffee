@@ -70,15 +70,17 @@ describe '.parseCredentials() gets credentials from URI hash', ->
 
     it 'if missing defaults to empty array', ->
       o = parse @strMin
-      eq o.scope.length, 0
+      eq o.scope, []
 
+    it 'if mising value defaults to empty array', ->
+      o = parse @strMin + '&scope='
+      eq o.scope, []
 
     it 'if single item becomes singlton array', ->
       o = parse @strMin + '&scope=foo'
       eq o.scope[0], 'foo'
 
-
     it 'if multi scope becomes array', ->
-      o = parse @strMin + '&scope=foo&scope=bar'
+      o = parse @strMin + '&scope=foo%20bar'
       a.include o.scope, 'foo'
       a.include o.scope, 'bar'
