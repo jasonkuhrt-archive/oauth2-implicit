@@ -48,12 +48,12 @@ Make an Implicit Grant Flow request to the Authorization Service. _This function
 [[start-options]]
 #### `Options`
 ```haskell
-auth_uri :: String
-client_id :: String
-# Optional Fields
-scope :: [String]
+auth_uri     :: String
+client_id    :: String
+-- Optional Fields
+scope        :: [String]
 redirect_uri :: String
-state :: {*}
+state        :: {*}
 ```
 
 Configure aspects of the Implicit Grant Flow.
