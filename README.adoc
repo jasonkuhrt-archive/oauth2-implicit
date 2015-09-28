@@ -104,5 +104,5 @@ accessToken : String
 tokenType   : String
 expiresIn   : Number | null
 scope       : [String]
-state       : String | null
+state       : {*}
 ```

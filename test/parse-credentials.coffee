@@ -1,15 +1,17 @@
+{ serializeState } = require '../lib/start'
 parse = o2i.parseCredentials
 
 
 
 describe '.parseCredentials() gets credentials from URI hash', ->
   beforeEach ->
+    @stateObject = foo: 'bar'
     @credentialsResponse =
-      access_token:'a'
+      access_token: 'a'
       token_type: 'bearer'
-      expires_in:100
-      scope:'a'
-      state:'b'
+      expires_in: 100
+      scope: 'a'
+      state: serializeState @stateObject
 
     @credentialsResponseMin =
       access_token:'a'
@@ -26,7 +28,7 @@ describe '.parseCredentials() gets credentials from URI hash', ->
       tokenType: 'bearer'
       expiresIn: '100'
       scope: ['a']
-      state: 'b'
+      state: @stateObject
     }
 
 
@@ -44,9 +46,9 @@ describe '.parseCredentials() gets credentials from URI hash', ->
 
   describe '.state', ->
 
-    it 'if missing defaults to null', ->
+    it 'if missing defaults to empty object', ->
       o = parse @strMin
-      eq o.state, null
+      a.isObject o.state
 
 
   describe '.token_type', ->
