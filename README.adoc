@@ -76,7 +76,7 @@ Defaults to the current protocol plus host (which is what you usually want), exa
 
 [options="header"]
 |===
-| Source | Redirect
+| Current Location | Inferred `redirect_uri`
 | `http://foo.bar.io:8000/qux#wux` | `http:/foo.bar.io:8000`
 | `https://foo.bar.io?lop=mop` | `https://foo.bar.io`
 |===
