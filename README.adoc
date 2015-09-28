@@ -20,16 +20,43 @@ npm --save install oauth2-implicit
 
 ## API
 
-### `implicitGrant`
+### `run` `default`
 
 ```
-implicitGrant :: Options -> Credentials
+run :: Options -> Credentials
 ```
 
-[[implicit-grant-options]]
-#### `Options :: {}`
+Convenience function that orchestrates <<start, `start`>>/<<finish, `finish`>>.
 
-Configure aspects of the Implicit Grant flow.
+#### `Options`
+See <<start-options, `start` docs>>.
+
+
+#### `Credentials`
+See <<finish-credentials, `finish` docs >>.
+
+
+
+
+### `start`
+```haskell
+start :: Options -> Null
+```
+
+Make an Implicit Grant Flow request to the Authorization Service. _This function navigates the User away from Client and to the Authorization Service_. Use <<finish, `finish`>> to handle the redirect back to Client from Authorization Service.
+
+[[start-options]]
+#### `Options`
+```haskell
+auth_uri :: String
+client_id :: String
+scope :: String | Array
+# Optional Fields
+redirect_uri :: String
+state :: {*}
+```
+
+Configure aspects of the Implicit Grant Flow.
 
 ##### `auth_uri :: String`
 The location of the Authorization Service that the Client will run the flow against.
@@ -39,9 +66,6 @@ The unique identification for this Client. The Authorization Service requires th
 
 ##### `scope :: String | Array`
 The scope that Client will use in its request to Authorization Server. If `Array` type used scopes will be joined by `+` into a `String`. Authorization servers should accept this format (DoorKeeper ruby does) but please open an issue if you discover otherwise.
-
-##### `state :: String` `optional`
-Arbitrary Client data that Authorization Server will pass back to Client in the response phase (redirect to the redirect_uri). For details on state see the link:http://tools.ietf.org/html/rfc6749#section-4.1.1[specification].
 
 ##### `redirect_uri :: String` `optional`
 The location that Client would like Authorization Service to finish the flow at. The given value must match a URI that was provided to the Authorization Service at registration time.
@@ -55,54 +79,32 @@ Defaults to the current protocol plus host (which is what you usually want), exa
 | `https://foo.bar.io?lop=mop` | `https://foo.bar.io`
 |===
 
-
-#### `Credentials :: {}`
-<<credentials, `Credentials`>> extracted from the URI hash as put there by the Authorization Server redirection process.
-
+##### `state :: {*}` `optional`
+Arbitrary Client data that Authorization Server will pass back to Client in the response phase (redirect to the redirect_uri). For details on state see the link:http://tools.ietf.org/html/rfc6749#section-4.1.1[specification].
 
 
-### `requestCredentials`
-```
-requestCredentials :: Options -> null
+### `finish`
+```haskell
+finish :: -> Credentials | Null
 ```
 
-Make a fresh token request to the authorization server. Note that this function ***does not read the result following redirect***, so your application still needs to use either `implicitGrant()` or `.readCredentials()`. This function is useful if, for example, your app makes some API call to a Resource Server that returns an Authorization Server (AS) error ("invalid token" or "expired token") and you need to make a fresh request to get credentials from said AS.
+Clear the credentials from the URI Hash (as put there by the Authorization Service during redirection) and return them.
 
-##### `Options :: {}`
-See <<implicit-grant-options, docs for `implicitGrant`>>.
+If no credentials are found `null` is returned instead.
 
-
-
-### `readCredentials`
-```
-readCredentials :: -> Credentials | null
-```
-
-Try clear the credentials from the URI Hash and return them as <<credentials, `Credentials`>>. If no credentials are found `null` is returned.
-
-
-### `parseCredentials`
-```
-parseCredentials :: String:URIHash -> Credentials
+[[finish-credentials]]
+#### `Credentials`
+```haskell
+accessToken :: String
+tokenType   :: String
+expiresIn   :: Number | Null
+scope       :: [String]
+state       :: {*}
 ```
 
-Convert String URI Hash credentials into structured <<credentials, `Credentials`>>
 
 
 
 ## Notes
 
 This library is designed in accordance with Implicit Grant flow as specified in the link:http://tools.ietf.org/html/rfc6749#section-4.2[OAuth2 specification (RFC 6749)].
-
-
-
-## Types
-
-### `Credentials`
-```yaml
-accessToken : String
-tokenType   : String
-expiresIn   : Number | null
-scope       : [String]
-state       : {*}
-```

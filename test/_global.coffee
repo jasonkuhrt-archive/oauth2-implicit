@@ -4,6 +4,10 @@ window.o2i = require('../lib').default
 
 
 
+afterEach -> setHash ''
+
+
+
 window.hashify = (hash)->
   if typeof hash isnt 'object' then return hash
   Object.keys(hash)
@@ -22,15 +26,7 @@ window.fixData = ->
     @creds =
       version: '0.5.0'
       expiresAt: null
-      id: JSON.stringify(@request)
+      id: JSON.stringify @request
       data:
         accessToken: 'foo-token'
         tokenType: 'bearer'
-
-window.fixHash = ->
-  beforeEach ->
-    setHash
-      access_token: @creds.data.accessToken
-      token_type: @creds.data.token_type
-
-  afterEach -> setHash ''
