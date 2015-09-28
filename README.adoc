@@ -50,8 +50,8 @@ Make an Implicit Grant Flow request to the Authorization Service. _This function
 ```haskell
 auth_uri :: String
 client_id :: String
-scope :: String | Array
 # Optional Fields
+scope :: [String]
 redirect_uri :: String
 state :: {*}
 ```
@@ -64,8 +64,10 @@ The location of the Authorization Service that the Client will run the flow agai
 ##### `client_id :: String`
 The unique identification for this Client. The Authorization Service requires this information from clients trying to run this flow. Every Client who has beforehand registered with the Authorization Service should have this information (it is created during registration time).
 
-##### `scope :: String | Array`
-The scope that Client will use in its request to Authorization Server. If `Array` type used scopes will be joined by `+` into a `String`. Authorization servers should accept this format (DoorKeeper ruby does) but please open an issue if you discover otherwise.
+##### `scope :: [String]`
+The scope that Client will use in its request to Authorization Server.
+
+Scopes will be joined by `+` when serialized into the query params. Authorization servers should accept this format (DoorKeeper ruby does) but please open an issue if you discover otherwise.
 
 ##### `redirect_uri :: String` `optional`
 The location that Client would like Authorization Service to finish the flow at. The given value must match a URI that was provided to the Authorization Service at registration time.
