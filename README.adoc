@@ -18,11 +18,29 @@ npm --save install oauth2-implicit
 
 
 
+## Example
+```js
+import authorize from 'oauth2-implicit'
+
+
+
+const credentials = authorize({
+  auth_uri: 'https://littlebitscloud.cc/oauth/authorize'
+  client_id: 'cloudbit-visualizer',
+  scope: ['read'],
+  state: {
+    location: window.location
+  },
+})
+```
+
+
+
 ## API
 
 ### `run` `default`
 
-```
+```haskell
 run :: Options -> Credentials
 ```
 
